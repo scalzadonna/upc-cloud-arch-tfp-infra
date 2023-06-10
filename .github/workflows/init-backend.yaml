@@ -10,9 +10,10 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: Configure AWS credentials
-        run: |
-          echo ${{ secrets.AWS_ACCESS_KEY_ID }} >> ~/.aws/credentials
-          echo ${{ secrets.AWS_SECRET_ACCESS_KEY }} >> ~/.aws/credentials 
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_DEFAULT_REGION: 'us-east-1'
       - name: Setup Terraform
         uses: hashicorp/setup-terraform@v1
         with:
