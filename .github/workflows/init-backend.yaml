@@ -21,7 +21,7 @@ jobs:
           AWS_DEFAULT_REGION: 'us-east-1'
         run : |         
            cd terraform/init-backend
-           terraform validate
            terraform init
+           terraform validate
            terraform plan
           # terraform apply --auto-approve
