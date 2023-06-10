@@ -1,0 +1,26 @@
+name: Deploy Initial backend on AWS
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  terraform:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Configure AWS credentials
+        run: |
+          echo ${{ secrets.AWS_ACCESS_KEY_ID }} >> ~/.aws/credentials
+          echo ${{ secrets.AWS_SECRET_ACCESS_KEY }} >> ~/.aws/credentials 
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v1
+        with:
+          terraform_version: 1.4.6
+      - name: Terraform Init & Apply      
+        run : |         
+           cd terraform/init-backend
+           terraform validate
+           terraform init
+           terraform plan
+          # terraform apply --auto-approve
