@@ -57,11 +57,11 @@ module "eks" {
     one = {
       name = "main-node-group"
 
-      instance_types = var.default_eks_node_group_instance_type
+      instance_types = var.eks_node_group_instance_type
 
-      min_size     = var.default_eks_node_group_min_size
-      max_size     = var.default_eks_node_group_max_size
-      desired_size = var.default_eks_node_group_desired_size
+      min_size     = var.eks_node_group_min_size
+      max_size     = var.eks_node_group_max_size
+      desired_size = var.eks_node_group_desired_size
     }
 
     
