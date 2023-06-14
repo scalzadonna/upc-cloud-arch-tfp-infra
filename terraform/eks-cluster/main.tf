@@ -4,7 +4,7 @@ data "aws_availability_zones" "available" {}
 locals {
   vpc_name = "upc-tfp-vpc"
   cluster_name = "upc-tfp-eks-${random_string.suffix.result}"
-  cluster_main_node_group_name = "upc-tfp--node-group-one"
+  cluster_main_node_group_name = "upc-tfp-one"
 }
 
 resource "random_string" "suffix" {
