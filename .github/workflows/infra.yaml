@@ -14,15 +14,19 @@ jobs:
         uses: hashicorp/setup-terraform@v1
         with:
           terraform_version: 1.4.6
-      - name: Terraform Init & Apply      
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v1
+        with:
+          aws-region: ${{ secrets.AWS_DEFAULT_REGION }}
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+      - name: Terraforming
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          AWS_SESSION_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
-          AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
+          BACKEND_CONFIG: env.ENV_BACKEND_CONFIG 
         run : |         
            cd terraform/hello-infra
-           terraform init -backend-config=../config.academy.s3.tfbackend
+           terraform init -backend-config=$BACKEND_CONFIG
            terraform validate
            terraform plan
            # terraform apply --auto-approve

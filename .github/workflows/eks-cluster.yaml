@@ -22,9 +22,11 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
       - name: Terraform Init 
+      env:
+          BACKEND_CONFIG: env.ENV_BACKEND_CONFIG 
         run : |         
-           cd terraform/eks-cluster
-           terraform init -backend-config=../config.academy.s3.tfbackend
+           cd terraform/hello-infra
+           terraform init -backend-config=$BACKEND_CONFIG
       - name: Terraform Validate
         run : |         
            cd terraform/eks-cluster     
