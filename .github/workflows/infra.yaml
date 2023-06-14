@@ -1,4 +1,4 @@
-name: Deploy Hello-VPC infra on AWS
+name: TF-Deploy Hello-VPC infra on AWS
 
 on:
   push:

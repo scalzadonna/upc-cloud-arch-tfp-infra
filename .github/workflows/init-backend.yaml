@@ -1,4 +1,4 @@
-name: Deploy Initial backend on AWS
+name: TF-Deploy Initial backend on AWS
 
 on:
   push:

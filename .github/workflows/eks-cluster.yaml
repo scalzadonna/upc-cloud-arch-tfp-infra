@@ -1,4 +1,4 @@
-name: Deploy EKS cluster on AWS
+name: TF-Deploy EKS cluster on AWS
 
 on:
   push:
