@@ -22,7 +22,7 @@ jobs:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         run : |         
            cd terraform/eks-cluster
-           terraform init
+           terraform init -backend-config=../config.academy.s3.tfbackend
            terraform validate
            terraform plan
            # terraform apply --auto-approve
