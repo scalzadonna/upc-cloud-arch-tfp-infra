@@ -2,7 +2,9 @@
 data "aws_availability_zones" "available" {}
 
 locals {
+  vpc_name = "upc-tfp-vpc"
   cluster_name = "upc-tfp-eks-${random_string.suffix.result}"
+  cluster_main_node_group_name = "upc-tfp--node-group-one"
 }
 
 resource "random_string" "suffix" {
@@ -14,7 +16,7 @@ module "vpc" {
   source  = "terraform-aws-modules/vpc/aws"
   version = "3.19.0"
 
-  name = "upc-tfp-vpc"
+  name = local.vpc_name
 
   cidr = var.cidr
   azs  = slice(data.aws_availability_zones.available.names, 0, 2)
@@ -49,13 +51,12 @@ module "eks" {
   cluster_endpoint_public_access = true
 
   eks_managed_node_group_defaults = {
-    ami_type = "AL2_x86_64"
-
+    ami_type = var.eks_node_group_ami_type
   }
 
   eks_managed_node_groups = {
     one = {
-      name = "main-node-group"
+      name = local.cluster_main_node_group_name
 
       instance_types = var.eks_node_group_instance_type
 

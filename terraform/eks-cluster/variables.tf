@@ -22,6 +22,12 @@ variable "private_subnets_cidrs" {
   default = ["10.0.1.0/24", "10.0.2.0/24"]
 }
 
+variable "eks_node_group_ami_type" {
+  description = "Default EKS node group AMI type"
+  type = string
+  default = "AL2_x86_64"
+}
+
 variable "eks_node_group_instance_type" {
   description = "Default EKS node group instance type"
   type = list
