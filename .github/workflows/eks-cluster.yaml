@@ -25,11 +25,11 @@ jobs:
         env:
           BACKEND_CONFIG: ../config.academy.s3.tfbackend
         run : |         
-           cd terraform/hello-infra
+           cd terraform/eks-cluster
            terraform init -backend-config=$BACKEND_CONFIG
       - name: Terraform Validate
         run : |         
-           cd terraform/eks-cluster     
+           cd terraform/eks-cluster
            terraform validate
       - name: Terraform Plan
         run : |         

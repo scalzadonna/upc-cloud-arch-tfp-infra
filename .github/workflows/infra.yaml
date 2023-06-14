@@ -23,7 +23,7 @@ jobs:
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
       - name: Terraforming
         env:
-          BACKEND_CONFIG: env.ENV_BACKEND_CONFIG 
+          BACKEND_CONFIG: ../config.academy.s3.tfbackend
         run : |         
            cd terraform/hello-infra
            terraform init -backend-config=$BACKEND_CONFIG
