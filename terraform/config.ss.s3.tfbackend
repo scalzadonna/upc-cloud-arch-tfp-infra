@@ -1,0 +1,2 @@
+bucket         = "tf-remote-state20230614125024709400000001"
+dynamodb_table = "tf-remote-state-lock"

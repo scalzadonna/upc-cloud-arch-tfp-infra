@@ -8,6 +8,7 @@ terraform {
 
   backend "s3" {
     region = "us-east-1"
+    key    = "tf-hello"
   }
 
   required_version = ">= 1.1.5"
