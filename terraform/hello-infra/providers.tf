@@ -7,9 +7,6 @@ terraform {
   }
 
   backend "s3" {
-    bucket = "tf-remote-state20230610104533439800000001"
-    key    = "tf-hello"
-    dynamodb_table = "tf-remote-state-lock"
     region = "us-east-1"
   }
 
