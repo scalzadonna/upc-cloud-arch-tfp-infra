@@ -42,7 +42,7 @@ jobs:
            cd terraform/eks-cluster
            terraform plan
       - name: Terraform Apply      
-        if: $TF_STEP_BY_STEP == 'apply'
+        if: env.TF_STEP_BY_STEP == 'apply'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
@@ -52,7 +52,7 @@ jobs:
            cd terraform/eks-cluster
            terraform apply --auto-approve
       - name: Terraform Destroy
-        if: $TF_STEP_BY_STEP == 'destroy'
+        if: env.TF_STEP_BY_STEP == 'destroy'
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
