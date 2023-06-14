@@ -22,7 +22,7 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
       - name: Terraform Init 
-      env:
+        env:
           BACKEND_CONFIG: env.ENV_BACKEND_CONFIG 
         run : |         
            cd terraform/hello-infra
