@@ -22,7 +22,7 @@ jobs:
           AWS_DEFAULT_REGION: 'us-east-1'
         run : |         
            cd terraform/hello-infra
-           terraform init
+           terraform init -backend-config=../config.academy.s3.tfbackend
            terraform validate
            terraform plan
            # terraform apply --auto-approve
