@@ -22,7 +22,7 @@ jobs:
           AWS_DEFAULT_REGION: ${{ secrets.AWS_DEFAULT_REGION }}
         run : |         
            cd terraform/eks-cluster
-           terraform init -backend-config=$ENV_BACKEND_CONFIG
+           terraform init -backend-config=${{ env.ENV_BACKEND_CONFIG }}
       - name: Terraform Validate     
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
