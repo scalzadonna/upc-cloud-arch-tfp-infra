@@ -20,16 +20,23 @@ Get default password:
 
 `kubectl -n default get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
 
-UKXlyOuUohyb0mur
 
 Install sample app:
 
 https://github.com/argoproj/argocd-example-apps.git
 
-`argocd app create guestbook --repo https://github.com/argoproj/argocd-example-apps.git --path helm-guestbook --dest-server https://kubernetes.default.svc --dest-namespace default`
+##In ArgoCD UI:##
+Create app: `guestbook`
+Repo: `https://github.com/argoproj/argocd-example-apps.git`
+Path: `helm-guestbook`
+Server: `https://kubernetes.default.svc` (default)
+Namespace: `default`
 
+Once create enable port-forwarding to access from local env:
 `kubectl port-forward svc/guestbook-helm-guestbook -n default 8888:80`
 
+Open the browser on http://localhost:8888
+ 
 # Install Crossplane
 
 Full explanation here:
