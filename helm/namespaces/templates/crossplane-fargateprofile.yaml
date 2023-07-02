@@ -1,0 +1,12 @@
+{{- if .Values.fargate -}}
+apiVersion: eks.platform.team3/v1alpha1
+kind: FargateProfile
+metadata:
+  name: {{ .Values.namespace }}
+spec:
+  parameters:
+    namespace: "{{ .Values.namespace }}"
+    osilEnv: "{{ .Values.environment }}"
+  compositionRef:
+    name: fargate-profile-platform
+{{- end }}

@@ -1,0 +1,66 @@
+version: 
+namespace: 
+
+environment: 
+
+fargate: false
+
+rbac:
+  create: false
+
+quotas:
+  cpu: "1"
+  memory: 1Gi
+
+application:
+  name: webserver
+  replicas: 1
+  container:
+    image: 
+    tag: 
+    ports:
+      containerPort: 80
+      name: http
+  limits:
+    cpu: 0.5
+    memory: 0.5Gi
+  requests:
+    cpu: 0.5
+    memory: 0.5Gi
+
+serviceAccount:
+  # Specifies whether a service account should be created
+  create: true
+  # Annotations to add to the service account
+  annotations: {}
+  # The name of the service account to use.
+  # If not set and create is true, a name is generated using the fullname template
+  name: 
+
+
+service:
+  type: 
+  port: 80
+  
+
+ingress:
+  enabled: 
+  annotations: 
+    alb.ingress.kubernetes.io/scheme: internal
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-path: /
+    # alb.ingress.kubernetes.io/certificate-arn: arn:aws:acm:eu-west-1:718639658456:certificate/cfc411d4-9f0a-46d7-a6c0-1d0c6c41b88c
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTP": 80}, {"HTTPS":443}]'
+    alb.ingress.kubernetes.io/ssl-redirect: '443'
+  paths:
+    - path: /
+      pathType: ImplementationSpecific
+
+  tls: []
+  #  - secretName: chart-example-tls
+  #    hosts:
+  #      - chart-example.local
+
+  # host: 
