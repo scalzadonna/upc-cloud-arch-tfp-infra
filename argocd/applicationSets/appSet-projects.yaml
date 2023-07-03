@@ -5,7 +5,7 @@ metadata:
 spec:
   generators:
   - git:
-      repoURL: git@github.com:scalzadonna/upc-cloud-arch-tfp-apps.git
+      repoURL: https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git
       revision: HEAD
       directories:
       - path: apps/*
