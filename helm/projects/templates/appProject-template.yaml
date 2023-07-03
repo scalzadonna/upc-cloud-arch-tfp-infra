@@ -11,6 +11,8 @@ spec:
   # Allow manifests to deploy from App automation repo
   sourceRepos:
   - https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git
+  - https://github.com/scalzadonna/upc-cloud-arch-tfp-infra.git
+
   # Only permit applications to deploy to the same namespace in the same cluster
   destinations:
   - namespace: {{ .Values.projectname }}
