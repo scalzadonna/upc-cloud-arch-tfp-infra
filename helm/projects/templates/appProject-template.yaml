@@ -10,8 +10,8 @@ spec:
   description: "Platform Project for {{ .Values.projectname }}"
   # Allow manifests to deploy from App automation repo
   sourceRepos:
-  - git@github.com:scalzadonna/upc-cloud-arch-tfp-apps.git
-  # Only permit applications to deploy to the guestbook namespace in the same cluster
+  - https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git
+  # Only permit applications to deploy to the same namespace in the same cluster
   destinations:
   - namespace: {{ .Values.projectname }}
     server: '*'

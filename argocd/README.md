@@ -34,6 +34,7 @@ Details:
 - Via SSH
 - Name: `igh-infra-repo`
 - Repository URL: `git@github.com:scalzadonna/upc-cloud-arch-tfp-infra.git`
+- Projects: * (all)
 - Key: (Private key contents created previously)
 
 
