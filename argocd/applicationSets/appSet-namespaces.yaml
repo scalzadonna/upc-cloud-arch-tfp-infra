@@ -15,7 +15,7 @@ spec:
       annotations:
         argocd.argoproj.io/manifest-generate-paths: ".;.."
     spec:
-      project: "{{path.basename}}"
+      project: "{{path.basename}}-project"
       source:
         #repoURL: https://github.com/scalzadonna/upc-cloud-arch-tfp-infra.git
         repoURL: https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git
