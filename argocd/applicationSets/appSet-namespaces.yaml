@@ -17,7 +17,7 @@ spec:
     spec:
       project: "{{path.basename}}"
       source:
-        repoURL: git@github.com:scalzadonna/upc-cloud-arch-tfp-infra.git
+        repoURL: https://github.com/scalzadonna/upc-cloud-arch-tfp-infra.git
         targetRevision: HEAD
         path: "helm/namespaces"
         helm:
