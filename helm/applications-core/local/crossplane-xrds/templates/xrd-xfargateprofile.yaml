@@ -1,0 +1,44 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: CompositeResourceDefinition
+metadata:
+  name: xfargateprofiles.eks.tfp.team3
+spec:
+  group: eks.tfp.team3
+  names:
+    kind: XFargateProfile
+    plural: xfargateprofiles
+  claimNames:
+    kind: FargateProfile
+    plural: fargateprofiles
+  versions:
+  - name: v1alpha1
+    served: true
+    referenceable: true
+    schema:
+      openAPIV3Schema:
+        type: object
+        properties:
+          spec:
+            type: object
+            properties:
+              parameters:
+                type: object
+                properties:
+                  namespace:
+                    type: string
+                  osilEnv:
+                    type: string
+                required:
+                - namespace
+                - osilEnv
+            required:
+            - parameters
+          status:
+            type: object
+            properties:
+              arn:
+                description: ARN for EKS Fargate Profile.
+                type: string
+              status:
+                description: Status for EKS Fargate Profile.
+                type: string

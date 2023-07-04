@@ -1,0 +1,57 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: fargate-profile-osil
+  labels:
+    crossplane.io/xrd: xfargateprofiles.eks.tfp.team3
+    provider: aws-upbound
+spec:
+  compositeTypeRef:
+    apiVersion: eks.tfp.team3/v1alpha1
+    kind: XFargateProfile
+  resources:
+  - name: fargateprofile
+    base:
+      apiVersion: eks.aws.upbound.io/v1beta1
+      kind: FargateProfile
+      metadata:
+        name: "fargateprofile" # To be patched
+      spec:
+        forProvider:
+          region: us-east-1
+          clusterName: "" # To be patched
+          selector:
+            - namespace: "" # To be patched
+          podExecutionRoleArn: "" # To be patched
+        providerConfigRef:
+          name: default
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.namespace
+      toFieldPath: metadata.name
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.osilEnv
+      toFieldPath: spec.forProvider.clusterName
+      transforms:
+      - type: string
+        string:
+          fmt: "upc-tfp-eks-%s"
+          type: Format
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.namespace
+      toFieldPath: spec.forProvider.selector[0].namespace
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.osilEnv
+      toFieldPath: spec.forProvider.podExecutionRoleArn
+      transforms:
+      - type: map
+        map:
+          dev: "arn:aws:iam::xyz:role/platform-core-fargate-role-dev"
+          qa: ""
+          prod: ""
+    - type: ToCompositeFieldPath
+      fromFieldPath: status.atProvider.arn
+      toFieldPath: status.arn
+    - type: ToCompositeFieldPath
+      fromFieldPath: status.atProvider.status
+      toFieldPath: status.status
