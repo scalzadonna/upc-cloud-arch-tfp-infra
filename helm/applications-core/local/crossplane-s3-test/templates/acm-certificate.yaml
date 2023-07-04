@@ -1,11 +1,11 @@
 apiVersion: acm.aws.upbound.io/v1beta1
 kind: Certificate
 metadata:
-  name: testing-osil
+  name: dev-tfp-team3
 spec:
   forProvider:
-    domainName: testing-osil.naas.dev.osil.grip.volkswagen.de
-    region: eu-west-1
+    domainName: testing-domain.dev-tfp-team3
+    region: us-east-1
     validationMethod: DNS
   providerConfigRef:
         name: default

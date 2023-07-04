@@ -1,7 +1,7 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: Composition
 metadata:
-  name: fargate-profile-osil
+  name: fargate-profile-tfp
   labels:
     crossplane.io/xrd: xfargateprofiles.eks.tfp.team3
     provider: aws-upbound
@@ -30,7 +30,7 @@ spec:
       fromFieldPath: spec.parameters.namespace
       toFieldPath: metadata.name
     - type: FromCompositeFieldPath
-      fromFieldPath: spec.parameters.osilEnv
+      fromFieldPath: spec.parameters.env
       toFieldPath: spec.forProvider.clusterName
       transforms:
       - type: string
@@ -41,7 +41,7 @@ spec:
       fromFieldPath: spec.parameters.namespace
       toFieldPath: spec.forProvider.selector[0].namespace
     - type: FromCompositeFieldPath
-      fromFieldPath: spec.parameters.osilEnv
+      fromFieldPath: spec.parameters.env
       toFieldPath: spec.forProvider.podExecutionRoleArn
       transforms:
       - type: map

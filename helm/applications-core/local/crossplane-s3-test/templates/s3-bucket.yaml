@@ -4,4 +4,4 @@ metadata:
   name: {{ .Values.s3.bucketname}}
 spec:
   forProvider:
-    region: eu-west-1
+    region: us-east-1

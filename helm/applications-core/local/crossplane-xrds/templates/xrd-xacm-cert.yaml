@@ -26,7 +26,7 @@ spec:
                 properties:
                   domainName:
                     type: string
-                  osilEnv:
+                  env:
                     type: string
                 required:
                 - domainName

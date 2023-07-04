@@ -71,7 +71,7 @@ spec:
       fromFieldPath: status.domainValidationOptions[0].resourceRecordType
       toFieldPath: spec.forProvider.type
     - type: FromCompositeFieldPath
-      fromFieldPath: spec.parameters.osilEnv
+      fromFieldPath: spec.parameters.env
       toFieldPath: spec.forProvider.zoneId
       transforms:
       - type: map

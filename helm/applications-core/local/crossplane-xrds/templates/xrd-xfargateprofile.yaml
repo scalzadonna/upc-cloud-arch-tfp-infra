@@ -26,11 +26,11 @@ spec:
                 properties:
                   namespace:
                     type: string
-                  osilEnv:
+                  env:
                     type: string
                 required:
                 - namespace
-                - osilEnv
+                - env
             required:
             - parameters
           status:
