@@ -1,9 +1,9 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: xfargateprofiles.eks.tfp.team3
+  name: xfargateprofiles.upc.tfp.eks
 spec:
-  group: eks.tfp.team3
+  group: upc.tfp.eks
   names:
     kind: XFargateProfile
     plural: xfargateprofiles

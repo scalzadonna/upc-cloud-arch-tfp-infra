@@ -1,9 +1,9 @@
 apiVersion: apiextensions.crossplane.io/v1
 kind: CompositeResourceDefinition
 metadata:
-  name: xacmcerts.security.tfp.team3
+  name: xacmcerts.security.upc.tfp.eks
 spec:
-  group: security.tfp.team3
+  group: security.upc.tfp.eks
   names:
     kind: XACMCert
     plural: xacmcerts

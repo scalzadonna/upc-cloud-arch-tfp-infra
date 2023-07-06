@@ -3,11 +3,11 @@ kind: Composition
 metadata:
   name: acm-cert-dns
   labels:
-    crossplane.io/xrd: xacmcerts.security.tfp.team3
+    crossplane.io/xrd: xacmcerts.security.upc.tfp.eks
     provider: aws-upbound
 spec:
   compositeTypeRef:
-    apiVersion: security.tfp.team3/v1alpha1
+    apiVersion: security.upc.tfp.eks/v1alpha1
     kind: XACMCert
   resources:
   - name: certificate
@@ -17,7 +17,7 @@ spec:
       spec:
         forProvider:
           # domainName: example-email.upbound-providers.io --> Specified in patch
-          region: us-east-1
+          region: {{ .Values.region}}
           validationMethod: DNS
         providerConfigRef:
           name: default
@@ -56,10 +56,10 @@ spec:
           name: "" # Specified in patch
           records:
             - "" # Specified in patch
-          region: eu-west-1
+          region: {{ .Values.region}}
           ttl: 5
           type: CNAME
-          zoneId: "{{ .Values.environment }}"
+          zoneId: "{{ .Values.env }}"
     patches:
     - type: FromCompositeFieldPath
       fromFieldPath: status.domainValidationOptions[0].resourceRecordName
@@ -76,7 +76,7 @@ spec:
       transforms:
       - type: map
         map:
-          dev: "ZONE_ID"
+          dev: {{ .Values.zoneId}}
           qa: ""
           prelive: ""
           prod: ""
@@ -87,7 +87,7 @@ spec:
       spec:
         forProvider:
           certificateArn: ""
-          region: us-east-1
+          region: {{ .Values.region}}
           validationRecordFqdns:
             - ""
     patches:

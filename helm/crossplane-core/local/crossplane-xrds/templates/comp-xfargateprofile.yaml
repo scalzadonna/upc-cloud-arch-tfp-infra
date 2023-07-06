@@ -3,11 +3,11 @@ kind: Composition
 metadata:
   name: fargate-profile-tfp
   labels:
-    crossplane.io/xrd: xfargateprofiles.eks.tfp.team3
+    crossplane.io/xrd: xfargateprofiles.upc.tfp.eks
     provider: aws-upbound
 spec:
   compositeTypeRef:
-    apiVersion: eks.tfp.team3/v1alpha1
+    apiVersion: upc.tfp.eks/v1alpha1
     kind: XFargateProfile
   resources:
   - name: fargateprofile
@@ -18,8 +18,8 @@ spec:
         name: "fargateprofile" # To be patched
       spec:
         forProvider:
-          region: us-east-1
-          clusterName: "" # To be patched
+          region: {{ .Values.region}}
+          clusterName: {{ .Values.clusterName}}
           selector:
             - namespace: "" # To be patched
           podExecutionRoleArn: "" # To be patched
@@ -30,14 +30,6 @@ spec:
       fromFieldPath: spec.parameters.namespace
       toFieldPath: metadata.name
     - type: FromCompositeFieldPath
-      fromFieldPath: spec.parameters.env
-      toFieldPath: spec.forProvider.clusterName
-      transforms:
-      - type: string
-        string:
-          fmt: "upc-tfp-eks-%s"
-          type: Format
-    - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.namespace
       toFieldPath: spec.forProvider.selector[0].namespace
     - type: FromCompositeFieldPath
@@ -46,7 +38,7 @@ spec:
       transforms:
       - type: map
         map:
-          dev: "arn:aws:iam::xyz:role/platform-core-fargate-role-dev"
+          dev: "arn:aws:iam::369651785831:role/LabRole"
           qa: ""
           prod: ""
     - type: ToCompositeFieldPath

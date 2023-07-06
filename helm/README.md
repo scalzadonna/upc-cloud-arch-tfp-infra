@@ -36,6 +36,13 @@ Once create enable port-forwarding to access from local env:
 `kubectl port-forward svc/guestbook-helm-guestbook -n default 8888:80`
 
 Open the browser on http://localhost:8888
+
+Expose using an AWS Load Balancer
+
+```
+kubectl patch service argo-cd-argocd-server -p '{"spec":{"type":"LoadBalancer"}}' && \
+kubectl get service argo-cd-argocd-server
+```
  
 # Install Crossplane
 
