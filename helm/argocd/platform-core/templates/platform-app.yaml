@@ -4,7 +4,6 @@ metadata:
   name: platform-core
 spec:
   destination:
-    name: "dev"
     namespace: default
     server: 'https://kubernetes.default.svc'
   source:
