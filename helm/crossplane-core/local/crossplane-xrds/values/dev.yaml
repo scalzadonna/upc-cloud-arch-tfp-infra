@@ -1,0 +1,4 @@
+region: us-east-1
+env: dev
+zoneId: Z103868230Q6BVALOM15N
+clusterName: upc-tfp-eks-cluster-one

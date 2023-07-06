@@ -1,0 +1,4 @@
+# version: 
+# namespace:
+appSourceRepo: https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git
+infraSourceRepo: https://github.com/scalzadonna/upc-cloud-arch-tfp-infra.git

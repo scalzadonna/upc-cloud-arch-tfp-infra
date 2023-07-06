@@ -1,0 +1,11 @@
+apiVersion: acm.aws.upbound.io/v1beta1
+kind: Certificate
+metadata:
+  name: argocd-dev-cert
+spec:
+  forProvider:
+    domainName: argocd.{{ .Values.domain}}
+    region: us-east-1
+    validationMethod: DNS
+  providerConfigRef:
+        name: default

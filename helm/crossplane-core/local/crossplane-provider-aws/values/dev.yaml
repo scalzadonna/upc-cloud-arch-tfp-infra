@@ -1,0 +1,6 @@
+provider:
+  aws:
+    version: "v0.27.0"
+
+controllerConfig:
+  roleArn: arn:aws:iam::xyz:role/platform-core-dev-infrastructure-deployer

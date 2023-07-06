@@ -7,7 +7,7 @@ Helm values: https://github.com/argoproj/argo-cd/blob/master/manifests/install.y
 
 `helm repo update`
 
-`helm install -f argo-dev.yaml argo-cd argo/argo-cd`
+`helm install -f argocd/argo-dev.yaml argo-cd argo/argo-cd`
 
 
 Access the server UI:
@@ -36,6 +36,13 @@ Once create enable port-forwarding to access from local env:
 `kubectl port-forward svc/guestbook-helm-guestbook -n default 8888:80`
 
 Open the browser on http://localhost:8888
+
+Expose using an AWS Load Balancer
+
+```
+kubectl patch service argo-cd-argocd-server -p '{"spec":{"type":"LoadBalancer"}}' && \
+kubectl get service argo-cd-argocd-server
+```
  
 # Install Crossplane
 
@@ -47,7 +54,7 @@ https://docs.crossplane.io/v1.12/getting-started/provider-aws/#install-crossplan
 
 `helm repo update`
 
-`helm install -f crossplane-dev.yaml crossplane crossplane-stable/crossplane --namespace crossplane-system --create-namespace`
+`helm install -f crossplane-core crossplane-dev.yaml crossplane crossplane-stable/crossplane --namespace crossplane-system --create-namespace`
 
 Verify Crossplane installed with 
 

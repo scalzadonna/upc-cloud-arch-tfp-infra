@@ -1,0 +1,41 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: {{ .Values.projectname }}-project
+  namespace: default
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  description: "Platform Project for {{ .Values.projectname }}"
+  # Allow manifests to deploy from App automation repo
+  sourceRepos:
+  - {{ .Values.appSourceRepo }}
+  - {{ .Values.infraSourceRepo }}
+
+  # Only permit applications to deploy to the same namespace in the same cluster
+  destinations:
+  - namespace: {{ .Values.projectname }}
+    server: '*'
+  # Deny all cluster-scoped resources from being created, except for Namespace
+  clusterResourceWhitelist:
+  - group: ''
+    kind: Namespace
+  roles:
+  # A role which provides read-only access to all applications in the project
+  - name: read-only
+    description: Read-only privileges to my-project
+    policies:
+    - p, proj:infra:read-only, applications, get, infra/*, allow
+    groups:
+    - argo-viewer
+    - argo-admin
+  # A role which provides sync privileges to only the application, e.g. to provide
+  # sync privileges to a CI system
+  - name: admin
+    description: Sync privileges for an application
+    policies:
+    - p, proj:infra:admin, *, *, infra/*, allow
+    - p, infra-gocd, *, *, infra/*, allow
+    groups:
+    - argo-admin

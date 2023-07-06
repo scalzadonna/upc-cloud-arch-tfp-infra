@@ -1,0 +1,49 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: fargate-profile-tfp
+  labels:
+    crossplane.io/xrd: xfargateprofiles.upc.tfp.eks
+    provider: aws-upbound
+spec:
+  compositeTypeRef:
+    apiVersion: upc.tfp.eks/v1alpha1
+    kind: XFargateProfile
+  resources:
+  - name: fargateprofile
+    base:
+      apiVersion: eks.aws.upbound.io/v1beta1
+      kind: FargateProfile
+      metadata:
+        name: "fargateprofile" # To be patched
+      spec:
+        forProvider:
+          region: {{ .Values.region}}
+          clusterName: {{ .Values.clusterName}}
+          selector:
+            - namespace: "" # To be patched
+          podExecutionRoleArn: "" # To be patched
+        providerConfigRef:
+          name: default
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.namespace
+      toFieldPath: metadata.name
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.namespace
+      toFieldPath: spec.forProvider.selector[0].namespace
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.env
+      toFieldPath: spec.forProvider.podExecutionRoleArn
+      transforms:
+      - type: map
+        map:
+          dev: "arn:aws:iam::369651785831:role/LabRole"
+          qa: ""
+          prod: ""
+    - type: ToCompositeFieldPath
+      fromFieldPath: status.atProvider.arn
+      toFieldPath: status.arn
+    - type: ToCompositeFieldPath
+      fromFieldPath: status.atProvider.status
+      toFieldPath: status.status

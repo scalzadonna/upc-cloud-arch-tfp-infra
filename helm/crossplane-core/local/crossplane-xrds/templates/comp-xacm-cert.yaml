@@ -1,0 +1,99 @@
+apiVersion: apiextensions.crossplane.io/v1
+kind: Composition
+metadata:
+  name: acm-cert-dns
+  labels:
+    crossplane.io/xrd: xacmcerts.security.upc.tfp.eks
+    provider: aws-upbound
+spec:
+  compositeTypeRef:
+    apiVersion: security.upc.tfp.eks/v1alpha1
+    kind: XACMCert
+  resources:
+  - name: certificate
+    base:
+      apiVersion: acm.aws.upbound.io/v1beta1
+      kind: Certificate
+      spec:
+        forProvider:
+          # domainName: example-email.upbound-providers.io --> Specified in patch
+          region: {{ .Values.region}}
+          validationMethod: DNS
+        providerConfigRef:
+          name: default
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.domainName
+      toFieldPath: spec.forProvider.domainName
+    - type: ToCompositeFieldPath
+      fromFieldPath: status.atProvider.arn
+      toFieldPath: status.arn
+    - type: ToCompositeFieldPath
+      fromFieldPath: status.atProvider.domainValidationOptions
+      toFieldPath: status.domainValidationOptions
+    - type: ToCompositeFieldPath
+      fromFieldPath: status.atProvider.notAfter
+      toFieldPath: status.notAfter
+    - type: ToCompositeFieldPath
+      fromFieldPath: status.atProvider.notBefore
+      toFieldPath: status.notBefore
+    # - type: ToCompositeFieldPath
+    #   fromFieldPath: status.atProvider.pendingRenewal
+    #   toFieldPath: status.pendingRenewal
+    # - type: ToCompositeFieldPath
+    #   fromFieldPath: status.atProvider.renewalEligibility
+    #   toFieldPath: status.renewalEligibility
+    - type: ToCompositeFieldPath
+      fromFieldPath: status.atProvider.status
+      toFieldPath: status.certStatus
+
+  - name: DNSRecord
+    base:
+      apiVersion: route53.aws.upbound.io/v1beta1
+      kind: Record
+      spec:
+        forProvider:
+          name: "" # Specified in patch
+          records:
+            - "" # Specified in patch
+          region: {{ .Values.region}}
+          ttl: 5
+          type: CNAME
+          zoneId: "{{ .Values.env }}"
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: status.domainValidationOptions[0].resourceRecordName
+      toFieldPath: spec.forProvider.name
+    - type: FromCompositeFieldPath
+      fromFieldPath: status.domainValidationOptions[0].resourceRecordValue
+      toFieldPath: spec.forProvider.records[*]
+    - type: FromCompositeFieldPath
+      fromFieldPath: status.domainValidationOptions[0].resourceRecordType
+      toFieldPath: spec.forProvider.type
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.env
+      toFieldPath: spec.forProvider.zoneId
+      transforms:
+      - type: map
+        map:
+          dev: {{ .Values.zoneId}}
+          qa: ""
+          prelive: ""
+          prod: ""
+  - name: CertificateValidation
+    base:
+      apiVersion: acm.aws.upbound.io/v1beta1
+      kind: CertificateValidation
+      spec:
+        forProvider:
+          certificateArn: ""
+          region: {{ .Values.region}}
+          validationRecordFqdns:
+            - ""
+    patches:
+    - type: FromCompositeFieldPath
+      fromFieldPath: status.arn
+      toFieldPath: spec.forProvider.certificateArn
+    - type: FromCompositeFieldPath
+      fromFieldPath: status.domainValidationOptions[0].resourceRecordName
+      toFieldPath: spec.forProvider.validationRecordFqdns[*]
