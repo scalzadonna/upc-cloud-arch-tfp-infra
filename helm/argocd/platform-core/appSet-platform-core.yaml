@@ -7,11 +7,11 @@ spec:
   - list:
       elements:
       - appSet: crossplane-core
-        wave: -3
+        wave: "-3"
       - appSet: apps-projects
-        wave: -2
+        wave: "-2"
       - appSet: namespaced-apps
-        wave: -1
+        wave: "-1"
   template:
     metadata:
       name: "{{appSet}}"
