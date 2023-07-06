@@ -1,8 +1,8 @@
 apiVersion: v2
-name: crossplane-provider-aws
-description: A Helm chart for Kubernetes
+name: platform-core
+description: Platform Core Base
 type: application
 # Versions are expected to follow Semantic Versioning (https://semver.org/)
 version: 0.1.0
 # This is the version number of the application being deployed.
-appVersion: "0.27.0"
+appVersion: "0.1.0"
