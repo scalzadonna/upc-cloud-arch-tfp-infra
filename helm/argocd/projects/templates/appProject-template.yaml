@@ -10,8 +10,8 @@ spec:
   description: "Platform Project for {{ .Values.projectname }}"
   # Allow manifests to deploy from App automation repo
   sourceRepos:
-  - https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git
-  - https://github.com/scalzadonna/upc-cloud-arch-tfp-infra.git
+  - {{ .Values.appSourceRepo }}
+  - {{ .Values.infraSourceRepo }}
 
   # Only permit applications to deploy to the same namespace in the same cluster
   destinations:

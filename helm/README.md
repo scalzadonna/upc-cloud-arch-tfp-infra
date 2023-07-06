@@ -7,7 +7,7 @@ Helm values: https://github.com/argoproj/argo-cd/blob/master/manifests/install.y
 
 `helm repo update`
 
-`helm install -f argo-dev.yaml argo-cd argo/argo-cd`
+`helm install -f argocd/argo-dev.yaml argo-cd argo/argo-cd`
 
 
 Access the server UI:
@@ -54,7 +54,7 @@ https://docs.crossplane.io/v1.12/getting-started/provider-aws/#install-crossplan
 
 `helm repo update`
 
-`helm install -f crossplane-dev.yaml crossplane crossplane-stable/crossplane --namespace crossplane-system --create-namespace`
+`helm install -f crossplane-core crossplane-dev.yaml crossplane crossplane-stable/crossplane --namespace crossplane-system --create-namespace`
 
 Verify Crossplane installed with 
 
