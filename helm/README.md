@@ -46,6 +46,8 @@ kubectl get service argo-cd-argocd-server
 
 ### Configuring Argo CD with Crossplane
 
+https://docs.crossplane.io/knowledge-base/integrations/argo-cd-crossplane/
+
 To configure Argo CD for Annotation resource tracking, edit the argocd-cm ConfigMap in the argocd Namespace. 
 
 Add application.resourceTrackingMethod: annotation

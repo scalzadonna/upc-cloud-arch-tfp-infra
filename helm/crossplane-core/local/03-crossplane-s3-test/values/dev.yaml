@@ -1,0 +1,3 @@
+s3:
+  bucketname: sample-tfp-eks-crossplane-123
+domain: upc-tfp-eks.santiscalzadonna.com
