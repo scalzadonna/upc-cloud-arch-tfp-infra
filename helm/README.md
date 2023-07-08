@@ -7,7 +7,7 @@ Helm values: https://github.com/argoproj/argo-cd/blob/master/manifests/install.y
 
 `helm repo update`
 
-`helm install -f helm/argocd/argo-dev.yaml argo-cd argo/argo-cd --namespace argocd --create-namespace`
+`helm install -f helm/argocd/argo-dev.yaml argo-cd argo/argo-cd`
 
 
 Access the server UI:
@@ -20,22 +20,6 @@ Get default password:
 
 `kubectl -n default get secret argocd-initial-admin-secret -o jsonpath="{.data.password}" | base64 -d`
 
-
-Install sample app:
-
-https://github.com/argoproj/argocd-example-apps.git
-
-## In ArgoCD UI:
-Create app: `guestbook`
-Repo: `https://github.com/argoproj/argocd-example-apps.git`
-Path: `helm-guestbook`
-Server: `https://kubernetes.default.svc` (default)
-Namespace: `default`
-
-Once create enable port-forwarding to access from local env:
-`kubectl port-forward svc/guestbook-helm-guestbook -n default 8888:80`
-
-Open the browser on http://localhost:8888
 
 Expose using an AWS Load Balancer
 
@@ -70,7 +54,7 @@ https://docs.crossplane.io/v1.12/getting-started/provider-aws/#install-crossplan
 
 `helm repo update`
 
-`helm install crossplane crossplane-stable/crossplane  --version 1..12.0 --namespace crossplane-system --create-namespace`
+`helm install crossplane crossplane-stable/crossplane  --namespace crossplane-system --create-namespace`
 
 Verify Crossplane installed with 
 
