@@ -15,7 +15,7 @@ spec:
       annotations:
         argocd.argoproj.io/manifest-generate-paths: ".;.."
     spec:
-      project: "platform-core"
+      project: "crossplane-core"
       source:
         repoURL: https://github.com/scalzadonna/upc-cloud-arch-tfp-infra.git
         targetRevision: HEAD

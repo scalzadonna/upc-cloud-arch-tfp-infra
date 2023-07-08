@@ -1,0 +1,42 @@
+apiVersion: argoproj.io/v1alpha1
+kind: AppProject
+metadata:
+  name: crossplane-core
+  namespace: default
+  # Finalizer that ensures that project is not deleted until it is not referenced by any application
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+  annotations:
+    argocd.argoproj.io/sync-wave: "-1"
+spec:
+  description: "Crossplane Core Project"
+  # Allow manifests to deploy from App and Infra automation repos
+  sourceRepos:
+  - {{ .Values.infraRepoUrl }}
+  destinations:
+  - namespace: '*'
+    server: '*'
+  clusterResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  namespaceResourceWhitelist:
+  - group: '*'
+    kind: '*'
+  roles:
+  # A role which provides read-only access to all applications in the project
+  - name: read-only
+    description: Read-only privileges to my-project
+    policies:
+    - p, proj:infra:read-only, applications, get, infra/*, allow
+    groups:
+    - argo-viewer
+    - argo-admin
+  # A role which provides sync privileges to only the application, e.g. to provide
+  # sync privileges to a CI system
+  - name: admin
+    description: Sync privileges for an application
+    policies:
+    - p, proj:infra:admin, *, *, infra/*, allow
+    - p, infra-gocd, *, *, infra/*, allow
+    groups:
+    - argo-admin
