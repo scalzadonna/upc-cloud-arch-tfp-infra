@@ -7,7 +7,7 @@ Helm values: https://github.com/argoproj/argo-cd/blob/master/manifests/install.y
 
 `helm repo update`
 
-`helm install -f helm/argocd/argo-dev.yaml argo-cd argo/argo-cd`
+`helm install -f helm/argocd/argo-dev.yaml argo-cd argo/argo-cd --namespace argocd --create-namespace`
 
 
 Access the server UI:
@@ -43,7 +43,21 @@ Expose using an AWS Load Balancer
 kubectl patch service argo-cd-argocd-server -p '{"spec":{"type":"LoadBalancer"}}' && \
 kubectl get service argo-cd-argocd-server
 ```
- 
+
+### Configuring Argo CD with Crossplane
+
+To configure Argo CD for Annotation resource tracking, edit the argocd-cm ConfigMap in the argocd Namespace. 
+
+Add application.resourceTrackingMethod: annotation
+
+to the data section as below:
+
+```
+apiVersion: v1
+data:
+  application.resourceTrackingMethod: annotation
+kind: ConfigMap
+```
 # Install Crossplane
 
 Full explanation here:
@@ -93,7 +107,7 @@ Apps repo details:
 - Repository URL: `https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git`
 - Projects: * (all)
 
-
+=== AUTOMATING ===
 ### Configure a new project
 - Name: `platform-core`
 - Repositories:
@@ -103,6 +117,9 @@ Apps repo details:
   - Server: https://kubernetes.default.svc
   - Name: in-cluster
   - Namespace: *
+
+========
+
 
 # Create Projects/Namespace meta apps
 

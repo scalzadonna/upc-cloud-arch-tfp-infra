@@ -1,1 +1,2 @@
-repoUrl: 'https://github.com/scalzadonna/upc-cloud-arch-tfp-infra.git'
+infraRepoUrl: 'https://github.com/scalzadonna/upc-cloud-arch-tfp-infra.git'
+appRepoUrl: 'https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git'
