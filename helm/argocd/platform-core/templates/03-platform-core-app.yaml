@@ -15,3 +15,7 @@ spec:
     repoURL: '{{ .Values.infraRepoUrl }}'
     targetRevision: HEAD
   project: 'platform-core'
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
