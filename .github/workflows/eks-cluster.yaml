@@ -3,6 +3,7 @@ name: TF-Deploy EKS cluster on AWS
 on:
   push:
     branches: [ main ]
+    paths: [ 'terraform/eks-cluster/**.tf' ]
 
 jobs:
   terraform:

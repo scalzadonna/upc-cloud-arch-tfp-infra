@@ -3,6 +3,8 @@ name: TF-Deploy Initial backend on AWS
 on:
   push:
     branches: [ main ]
+    paths: [ 'terraform/init-backend/**.tf' ]
+
 
 jobs:
   terraform:
