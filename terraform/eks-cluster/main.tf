@@ -3,13 +3,8 @@ data "aws_availability_zones" "available" {}
 
 locals {
   vpc_name = "upc-tfp-vpc"
-  cluster_name = "upc-tfp-eks-${random_string.suffix.result}"
-  cluster_main_node_group_name = "upc-tfp-one"
-}
-
-resource "random_string" "suffix" {
-  length  = 4
-  special = false
+  cluster_name = "upc-tfp-eks-dev"
+  cluster_main_node_group_name = "upc-tfp-cluster-one"
 }
 
 module "vpc" {
@@ -59,6 +54,9 @@ module "eks" {
       name = local.cluster_main_node_group_name
 
       instance_types = var.eks_node_group_instance_type
+
+      create_iam_role = false
+      iam_role_arn = "arn:aws:iam::369651785831:role/LabRole"
 
       min_size     = var.eks_node_group_min_size
       max_size     = var.eks_node_group_max_size

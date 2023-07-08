@@ -7,7 +7,7 @@ Helm values: https://github.com/argoproj/argo-cd/blob/master/manifests/install.y
 
 `helm repo update`
 
-`helm install -f argocd/argo-dev.yaml argo-cd argo/argo-cd`
+`helm install -f helm/argocd/argo-dev.yaml argo-cd argo/argo-cd`
 
 
 Access the server UI:
@@ -25,7 +25,7 @@ Install sample app:
 
 https://github.com/argoproj/argocd-example-apps.git
 
-##In ArgoCD UI:##
+## In ArgoCD UI:
 Create app: `guestbook`
 Repo: `https://github.com/argoproj/argocd-example-apps.git`
 Path: `helm-guestbook`
@@ -54,23 +54,17 @@ https://docs.crossplane.io/v1.12/getting-started/provider-aws/#install-crossplan
 
 `helm repo update`
 
-`helm install -f crossplane-core crossplane-dev.yaml crossplane crossplane-stable/crossplane --namespace crossplane-system --create-namespace`
+`helm install crossplane crossplane-stable/crossplane  --version 1..12.0 --namespace crossplane-system --create-namespace`
 
 Verify Crossplane installed with 
 
 `kubectl get pods -n crossplane-system`
 `kubectl api-resources  | grep crossplane`
 
-Install the Crossplane AWS provider
-
-`kubectl apply -f aws-provider.yaml`
-
-Verify Crossplane AWS provider
-`kubectl get providers`
 
 Configure secrets
 
-Update text file: `aws-credentials.txt` with your AWS account credentials
+Create a text file: `aws-credentials.txt` with your AWS account credentials
 
 Create a kubernetes secret from the file
 
@@ -81,9 +75,64 @@ View the secret
 
 `kubectl describe secret aws-secret -n crossplane-system`
 
+### Configure new repositories in ArgoCD
+
+Settings / Repositories / Connect Repo
+
+Infra repo details:
+
+- Via HTTPS
+- Name: `igh-infra-repo`
+- Repository URL: `https://github.com/scalzadonna/upc-cloud-arch-tfp-infra.git`
+- Projects: * (all)
+  
+Apps repo details:
+
+- Via SSH
+- Name: `igh-apps-repo`
+- Repository URL: `https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git`
+- Projects: * (all)
+
+
+### Configure a new project
+- Name: `platform-core`
+- Repositories:
+  - https://github.com/scalzadonna/upc-cloud-arch-tfp-infra.git
+  - https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git
+- Destinations:
+  - Server: https://kubernetes.default.svc
+  - Name: in-cluster
+  - Namespace: *
+
+# Create Projects/Namespace meta apps
+
+## Argo CD / New app
+
+- Name: core
+- Project: platform-core
+- Repo URL: git@github.com:scalzadonna/upc-cloud-arch-tfp-infra.git
+- Path: helm/argocd/platform-core
+- Auto-Create Namespace ON
+- Destination Cluster URL: https://kubernetes.default.svc
+- Namespace: default
+- Values Files: values.yaml
+
+Wait for synchronization and voila!
+
+=====ARGO=======
+Install the Crossplane AWS provider
+
+`kubectl apply -f aws-provider.yaml`
+
+Verify Crossplane AWS provider
+`kubectl get providers`
+
+
 Create a ProviderConfig 
 
 `kubectl apply -f aws-provider-config.yaml`
+
+=====ARGO=======
 
 Test the provider
 
