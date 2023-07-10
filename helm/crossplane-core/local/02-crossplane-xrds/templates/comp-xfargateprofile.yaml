@@ -36,10 +36,12 @@ spec:
       fromFieldPath: spec.parameters.env
       toFieldPath: spec.forProvider.clusterName
       transforms:
-      - type: string
-        string:
-          fmt: "upc-tfp-eks-%s-two"
-          type: Format
+      - type: map
+        map:
+          dev: "upc-tfp-eks-dev-one"
+          dev2: "upc-tfp-eks-dev-two"
+          qa: ""
+          prod: ""
     - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.env
       toFieldPath: spec.forProvider.region
@@ -47,6 +49,7 @@ spec:
       - type: map
         map:
           dev: "us-east-1"
+          dev2: "us-east-1"
           qa: ""
           prod: ""
     - type: FromCompositeFieldPath
@@ -56,6 +59,7 @@ spec:
       - type: map
         map:
           dev: "arn:aws:iam::369651785831:role/LabRole"
+          dev2: "arn:aws:iam::369651785831:role/LabRole"
           qa: ""
           prod: ""
     - type: ToCompositeFieldPath
