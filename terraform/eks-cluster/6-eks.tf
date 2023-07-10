@@ -6,7 +6,7 @@ locals {
 }
 
 resource "aws_eks_cluster" "eks_cluster" {
-  name     = "${var.eks_name}-${var.eks_env}-${eks_tier}"
+  name     = "${var.eks_name}-${var.eks_env}-${var.eks_tier}"
   role_arn = local.labrole_arn
 
   vpc_config {
