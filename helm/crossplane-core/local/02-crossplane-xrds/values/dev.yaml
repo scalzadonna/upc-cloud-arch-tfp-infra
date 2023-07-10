@@ -1,4 +1,21 @@
-region: us-east-1
-env: dev
-zoneId: Z103868230Q6BVALOM15N
-clusterName: upc-tfp-eks-cluster-one
+env: 
+  dev:
+    one: 
+      name: "dev"
+      region: "us-east-1"
+      cluster: "upc-tfp-eks-dev-one"
+      zoneId: "Z01"
+      role: "arn:aws:iam::369651785831:role/LabRole"
+    two: 
+      name: "two"
+      region: "us-east-1"
+      cluster: "upc-tfp-eks-dev-two"
+      zoneId: "Z02"
+      role: "arn:aws:iam::369651785831:role/LabRole"
+    three:
+      name: "three"
+      region: "us-east-1"
+      cluster: "upc-tfp-eks-dev-three"
+      zoneId: "Z03"
+      role: "arn:aws:iam::369651785831:role/LabRole"
+    

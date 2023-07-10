@@ -38,8 +38,9 @@ spec:
       transforms:
       - type: map
         map:
-          dev: "upc-tfp-eks-dev-one"
-          dev2: "upc-tfp-eks-dev-two"
+          dev: {{ .Values.env.dev.one.cluster }}
+          dev2: {{ .Values.env.dev.two.cluster }}
+          dev3: {{ .Values.env.dev.three.cluster }}
           qa: ""
           prod: ""
     - type: FromCompositeFieldPath
@@ -48,8 +49,9 @@ spec:
       transforms:
       - type: map
         map:
-          dev: "us-east-1"
-          dev2: "us-east-1"
+          dev: {{ .Values.env.dev.one.region }}
+          dev2: {{ .Values.env.dev.two.region }}
+          dev3: {{ .Values.env.dev.three.region }}
           qa: ""
           prod: ""
     - type: FromCompositeFieldPath
@@ -58,8 +60,9 @@ spec:
       transforms:
       - type: map
         map:
-          dev: "arn:aws:iam::369651785831:role/LabRole"
-          dev2: "arn:aws:iam::369651785831:role/LabRole"
+          dev: {{ .Values.env.dev.one.role }}
+          dev2: {{ .Values.env.dev.two.role }}
+          dev3: {{ .Values.env.dev.three.role }}
           qa: ""
           prod: ""
     - type: ToCompositeFieldPath

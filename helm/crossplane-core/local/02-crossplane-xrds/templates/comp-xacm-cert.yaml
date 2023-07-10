@@ -17,7 +17,7 @@ spec:
       spec:
         forProvider:
           # domainName: example-email.upbound-providers.io --> Specified in patch
-          region: {{ .Values.region}}
+          region: "" # Specified in patch
           validationMethod: DNS
         providerConfigRef:
           name: default
@@ -25,6 +25,18 @@ spec:
     - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.domainName
       toFieldPath: spec.forProvider.domainName
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.env
+      toFieldPath: spec.forProvider.region
+      transforms:
+      - type: map
+        map:
+          dev: {{ .Values.env.dev.one.region }}
+          dev2: {{ .Values.env.dev.two.region }}
+          dev3: {{ .Values.env.dev.three.region }}
+          qa: ""
+          prelive: ""
+          prod: ""
     - type: ToCompositeFieldPath
       fromFieldPath: status.atProvider.arn
       toFieldPath: status.arn
@@ -56,10 +68,10 @@ spec:
           name: "" # Specified in patch
           records:
             - "" # Specified in patch
-          region: {{ .Values.region}}
+          region: "" # Specified in patch
           ttl: 5
           type: CNAME
-          zoneId: "{{ .Values.env }}"
+          zoneId: "" # Specified in patch
     patches:
     - type: FromCompositeFieldPath
       fromFieldPath: status.domainValidationOptions[0].resourceRecordName
@@ -72,11 +84,25 @@ spec:
       toFieldPath: spec.forProvider.type
     - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.env
+      toFieldPath: spec.forProvider.region
+      transforms:
+      - type: map
+        map:
+          dev: {{ .Values.env.dev.one.region }}
+          dev2: {{ .Values.env.dev.two.region }}
+          dev3: {{ .Values.env.dev.three.region }}
+          qa: ""
+          prelive: ""
+          prod: ""
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.env
       toFieldPath: spec.forProvider.zoneId
       transforms:
       - type: map
         map:
-          dev: {{ .Values.zoneId}}
+          dev: {{ .Values.env.dev.one.zoneId }}
+          dev2: {{ .Values.env.dev.two.zoneId }}
+          dev3: {{ .Values.env.dev.three.zoneId }}
           qa: ""
           prelive: ""
           prod: ""
@@ -87,7 +113,7 @@ spec:
       spec:
         forProvider:
           certificateArn: ""
-          region: {{ .Values.region}}
+          region: "" # Specified in patch
           validationRecordFqdns:
             - ""
     patches:
@@ -97,3 +123,16 @@ spec:
     - type: FromCompositeFieldPath
       fromFieldPath: status.domainValidationOptions[0].resourceRecordName
       toFieldPath: spec.forProvider.validationRecordFqdns[*]
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.env
+      toFieldPath: spec.forProvider.region
+      transforms:
+      - type: map
+        map:
+          dev: {{ .Values.env.dev.one.region }}
+          dev2: {{ .Values.env.dev.two.region }}
+          dev3: {{ .Values.env.dev.three.region }}
+          qa: ""
+          prelive: ""
+          prod: ""
+    
