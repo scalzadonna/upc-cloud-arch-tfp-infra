@@ -5,10 +5,6 @@ resource "helm_release" "argocd" {
   version    = "5.36.10"
   namespace  = "default"
 
-  # values = [
-  #   file("../../helm/argocd/argo-dev.yaml")
-  # ]
-
   provisioner "local-exec" {
     command = "kubectl patch -n default service argocd-server -p '{\"spec\":{\"type\":\"LoadBalancer\"}}'"
   }
