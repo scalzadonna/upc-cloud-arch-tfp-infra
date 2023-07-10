@@ -41,8 +41,8 @@ spec:
           dev: {{ .Values.env.dev.one.cluster }}
           dev2: {{ .Values.env.dev.two.cluster }}
           dev3: {{ .Values.env.dev.three.cluster }}
-          qa: ""
-          prod: ""
+          qa: {{ .Values.env.qa.one.cluster }}
+          prod: {{ .Values.env.prod.one.cluster }}
     - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.env
       toFieldPath: spec.forProvider.region
@@ -52,8 +52,8 @@ spec:
           dev: {{ .Values.env.dev.one.region }}
           dev2: {{ .Values.env.dev.two.region }}
           dev3: {{ .Values.env.dev.three.region }}
-          qa: ""
-          prod: ""
+          qa: {{ .Values.env.qa.one.region }}
+          prod: {{ .Values.env.prod.one.region }}
     - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.env
       toFieldPath: spec.forProvider.podExecutionRoleArn
@@ -63,8 +63,8 @@ spec:
           dev: {{ .Values.env.dev.one.role }}
           dev2: {{ .Values.env.dev.two.role }}
           dev3: {{ .Values.env.dev.three.role }}
-          qa: ""
-          prod: ""
+          qa: {{ .Values.env.qa.one.role }}
+          prod: {{ .Values.env.prod.one.role }}
     - type: ToCompositeFieldPath
       fromFieldPath: status.atProvider.arn
       toFieldPath: status.arn

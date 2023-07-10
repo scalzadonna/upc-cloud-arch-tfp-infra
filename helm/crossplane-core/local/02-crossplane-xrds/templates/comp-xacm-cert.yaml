@@ -34,9 +34,8 @@ spec:
           dev: {{ .Values.env.dev.one.region }}
           dev2: {{ .Values.env.dev.two.region }}
           dev3: {{ .Values.env.dev.three.region }}
-          qa: ""
-          prelive: ""
-          prod: ""
+          qa: {{ .Values.env.qa.one.region }}
+          prod: {{ .Values.env.prod.one.region }}
     - type: ToCompositeFieldPath
       fromFieldPath: status.atProvider.arn
       toFieldPath: status.arn
@@ -91,9 +90,8 @@ spec:
           dev: {{ .Values.env.dev.one.region }}
           dev2: {{ .Values.env.dev.two.region }}
           dev3: {{ .Values.env.dev.three.region }}
-          qa: ""
-          prelive: ""
-          prod: ""
+          qa: {{ .Values.env.qa.one.region }}
+          prod: {{ .Values.env.prod.one.region }}
     - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.env
       toFieldPath: spec.forProvider.zoneId
@@ -103,9 +101,8 @@ spec:
           dev: {{ .Values.env.dev.one.zoneId }}
           dev2: {{ .Values.env.dev.two.zoneId }}
           dev3: {{ .Values.env.dev.three.zoneId }}
-          qa: ""
-          prelive: ""
-          prod: ""
+          qa: {{ .Values.env.qa.one.zoneId }}
+          prod: {{ .Values.env.prod.one.zoneId }}
   - name: CertificateValidation
     base:
       apiVersion: acm.aws.upbound.io/v1beta1
@@ -132,7 +129,5 @@ spec:
           dev: {{ .Values.env.dev.one.region }}
           dev2: {{ .Values.env.dev.two.region }}
           dev3: {{ .Values.env.dev.three.region }}
-          qa: ""
-          prelive: ""
-          prod: ""
-    
+          qa: {{ .Values.env.qa.one.region }}
+          prod: {{ .Values.env.prod.one.region }}

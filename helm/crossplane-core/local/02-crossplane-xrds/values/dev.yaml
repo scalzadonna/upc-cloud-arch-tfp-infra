@@ -18,4 +18,18 @@ env:
       cluster: "upc-tfp-eks-dev-three"
       zoneId: "Z103868230Q6BVALOM15N"
       role: "arn:aws:iam::369651785831:role/LabRole"
+  qa:
+    one:
+      name: "qa"
+      region: "us-east-1"
+      cluster: "upc-tfp-eks-qa-one"
+      zoneId: "ZO1-QA"
+      role: "arn:aws:iam::xxx:role/LabRole"
+  prod:
+    one:
+      name: "prod"
+      region: "us-east-1"
+      cluster: "upc-tfp-eks-prod-one"
+      zoneId: "ZO1-PRD"
+      role: "arn:aws:iam::xxx:role/LabRole"
     
