@@ -12,10 +12,10 @@ env:
       cluster: "upc-tfp-eks-dev-two"
       zoneId: "Z103868230Q6BVALOM15N"
       role: "arn:aws:iam::369651785831:role/LabRole"
-    three:
-      name: "three"
+    thre:
+      name: "thre"
       region: "us-east-1"
-      cluster: "upc-tfp-eks-dev-three"
+      cluster: "upc-tfp-eks-dev-thre"
       zoneId: "Z103868230Q6BVALOM15N"
       role: "arn:aws:iam::369651785831:role/LabRole"
   qa:
