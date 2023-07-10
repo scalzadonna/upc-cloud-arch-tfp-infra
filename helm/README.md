@@ -75,80 +75,22 @@ View the secret
 
 `kubectl describe secret aws-secret -n crossplane-system`
 
-### Configure new repositories in ArgoCD
+## Deploy Platform Core in ArgoCD
 
-Settings / Repositories / Connect Repo
+`helm install platform-core helm/argocd/platform-core`
 
-Infra repo details:
+### Test the provider
 
-- Via HTTPS
-- Name: `igh-infra-repo`
-- Repository URL: `https://github.com/scalzadonna/upc-cloud-arch-tfp-infra.git`
-- Projects: * (all)
-  
-Apps repo details:
-
-- Via SSH
-- Name: `igh-apps-repo`
-- Repository URL: `https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git`
-- Projects: * (all)
-
-=== AUTOMATING ===
-### Configure a new project
-- Name: `platform-core`
-- Repositories:
-  - https://github.com/scalzadonna/upc-cloud-arch-tfp-infra.git
-  - https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git
-- Destinations:
-  - Server: https://kubernetes.default.svc
-  - Name: in-cluster
-  - Namespace: *
-
-========
-
-
-# Create Projects/Namespace meta apps
-
-## Argo CD / New app
-
-- Name: core
-- Project: platform-core
-- Repo URL: git@github.com:scalzadonna/upc-cloud-arch-tfp-infra.git
-- Path: helm/argocd/platform-core
-- Auto-Create Namespace ON
-- Destination Cluster URL: https://kubernetes.default.svc
-- Namespace: default
-- Values Files: values.yaml
-
-Wait for synchronization and voila!
-
-=====ARGO=======
-Install the Crossplane AWS provider
-
-`kubectl apply -f aws-provider.yaml`
-
-Verify Crossplane AWS provider
-`kubectl get providers`
-
-
-Create a ProviderConfig 
-
-`kubectl apply -f aws-provider-config.yaml`
-
-=====ARGO=======
-
-Test the provider
-
-Create a managed resource 
+### Create a managed resource 
 
 `kubectl apply -f aws-bucket-resource.yaml`
 
-Verify the bucket was created
+### Verify the bucket was created
 
 `kubectl get buckets`
 
 `aws s3 ls`
 
-Delete the managed resource
+### Delete the managed resource
 
 `kubectl delete bucket <bucketname>`
