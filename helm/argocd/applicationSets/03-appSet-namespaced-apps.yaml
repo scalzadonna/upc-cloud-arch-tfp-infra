@@ -8,7 +8,7 @@ spec:
       repoURL: https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git
       revision: HEAD
       directories:
-      - path: apps/*
+      - path: namespaced-apps/*
   template:
     metadata:
       name: "{{path.basename}}"
@@ -24,7 +24,7 @@ spec:
           # Release name override (defaults to application name)
           releaseName: "{{path.basename}}"
           valueFiles:
-            - "../../apps/{{path.basename}}/{{path.basename}}.yaml"
+            - "../../namespaced-apps/{{path.basename}}/{{path.basename}}.yaml"
       destination:
         # Default base cluster
         server: 'https://kubernetes.default.svc'

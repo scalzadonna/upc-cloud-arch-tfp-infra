@@ -8,7 +8,7 @@ spec:
       repoURL: https://github.com/scalzadonna/upc-cloud-arch-tfp-apps.git
       revision: HEAD
       directories:
-      - path: apps/*
+      - path: namespaced-apps/*
   template:
     metadata:
       name: "{{path.basename}}-project"
