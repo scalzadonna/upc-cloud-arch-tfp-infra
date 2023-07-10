@@ -23,12 +23,10 @@ Get default password:
 
 Expose using an AWS Load Balancer
 
-=== Included in argo-dev values file ===
 ```
 kubectl patch service argo-cd-argocd-server -p '{"spec":{"type":"LoadBalancer"}}' && \
 kubectl get service argo-cd-argocd-server
 ```
-=== END ===
 
 ### Configuring Argo CD with Crossplane
 
@@ -40,14 +38,12 @@ Add application.resourceTrackingMethod: annotation
 
 to the data section as below:
 
-=== Included in argo-dev values file ===
 ```
 apiVersion: v1
 data:
   application.resourceTrackingMethod: annotation
 kind: ConfigMap
 ```
-=== END ===
 
 # Install Crossplane
 

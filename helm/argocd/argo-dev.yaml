@@ -18796,8 +18796,6 @@ metadata:
     app.kubernetes.io/name: argocd-cm
     app.kubernetes.io/part-of: argocd
   name: argocd-cm
-data:
-  application.resourceTrackingMethod: annotation
 ---
 apiVersion: v1
 kind: ConfigMap
@@ -19010,7 +19008,6 @@ metadata:
     app.kubernetes.io/part-of: argocd
   name: argocd-server
 spec:
-  type: LoadBalancer
   ports:
   - name: http
     port: 80
