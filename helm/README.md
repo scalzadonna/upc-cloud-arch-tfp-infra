@@ -68,7 +68,7 @@ Create a text file: `aws-credentials.txt` with your AWS account credentials
 
 Create a kubernetes secret from the file
 
-`kubectl create secret generic aws-secret -n crossplane-system --from-file=creds=./aws-credentials.txt`
+`kubectl create secret generic aws-secret -n crossplane-system --from-file=creds=../aws-credentials.txt`
 
 
 View the secret
