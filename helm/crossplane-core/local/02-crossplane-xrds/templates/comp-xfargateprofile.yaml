@@ -18,7 +18,7 @@ spec:
         name: "fargateprofile" # To be patched
       spec:
         forProvider:
-          region: "us-east-1"
+          region: "" #To be patched
           clusterName: "" #To be patched
           selector:
             - namespace: "" # To be patched
@@ -38,8 +38,17 @@ spec:
       transforms:
       - type: string
         string:
-          fmt: "upc-tfp-eks-%s-one"
+          fmt: "upc-tfp-eks-%s-two"
           type: Format
+    - type: FromCompositeFieldPath
+      fromFieldPath: spec.parameters.env
+      toFieldPath: spec.forProvider.region
+      transforms:
+      - type: map
+        map:
+          dev: "us-east-1"
+          qa: ""
+          prod: ""
     - type: FromCompositeFieldPath
       fromFieldPath: spec.parameters.env
       toFieldPath: spec.forProvider.podExecutionRoleArn
