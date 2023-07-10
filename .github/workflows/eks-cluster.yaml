@@ -22,6 +22,14 @@ jobs:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-session-token: ${{ secrets.AWS_SESSION_TOKEN }}
+      - name: Test Vars
+        env:
+          # Inject secret values to environment variables
+          AWS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
+        run: |
+          printenv | grep AWS_
       - name: Terraform Init 
         env:
           BACKEND_CONFIG: ../config.academy.s3.tfbackend
@@ -33,6 +41,11 @@ jobs:
            cd terraform/eks-cluster
            terraform validate
       - name: Terraform Plan
+        env:
+          # Inject secret values to environment variables
+          AWS_KEY: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          AWS_TOKEN: ${{ secrets.AWS_SESSION_TOKEN }}
         run : |         
            cd terraform/eks-cluster
            terraform plan

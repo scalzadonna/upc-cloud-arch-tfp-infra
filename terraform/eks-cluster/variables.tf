@@ -1,53 +1,71 @@
 variable "region" {
-  description = "AWS region"
-  type        = string
-  default     = "us-east-1"
+  default = "us-east-1"
 }
 
-variable "cidr" {
-  description = "EKS Cluster default CIDR block"
-  type = string 
+variable eks_env {
+  default = "dev"
+}
+
+variable eks_tier {
+  default = "one"
+}
+
+variable eks_name {
+  default = "upc-tfp-eks"
+}
+
+variable vpc_name {
+  default = "upc-tfp-vpc"
+}
+
+variable vpc_subnet_prefix {
+  default = "upc-tfp"
+}
+
+variable igw_name {
+  default = "upc-tfp-igw"
+}
+
+variable nat_name {
+  description = ""
+  default = "upc-tfp-nat"
+}
+
+variable vpc_cidr {
   default = "10.0.0.0/16"
 }
 
-variable "public_subnets_cidrs" {
-  description = "EKS Cluster public subnets default CIDRs"
-  type = list
-  default = ["10.0.16.0/24", "10.0.17.0/24"]
+variable domain {
+  default = "upc-tfp-eks.platform-core.com"
 }
 
-variable "private_subnets_cidrs" {
-  description = "EKS Cluster public subnets default CIDRs"
-  type = list
-  default = ["10.0.1.0/24", "10.0.2.0/24"]
+variable role_name {
+  default = "LabRole"
 }
 
-variable "eks_node_group_ami_type" {
-  description = "Default EKS node group AMI type"
-  type = string
-  default = "AL2_x86_64"
+variable eks_nodegroup_name {
+  default = "ng-one" #ng-prv
 }
 
-variable "eks_node_group_instance_type" {
-  description = "Default EKS node group instance type"
-  type = list
-  default = ["t3.medium"]
+variable eks_nodes_capacity_type {
+  default = "ON_DEMAND"
+}
+variable eks_nodes_instance_type {
+  default = "t3.large"
 }
 
-variable "eks_node_group_min_size" {
-  description = "Default EKS node group min size"
-  type = number
+variable eks_nodegroup_min_size {
   default = 1
 }
 
-variable "eks_node_group_max_size" {
-  description = "Default EKS node group max size"
-  type = number
-  default = 3
+variable eks_nodegroup_desired_size {
+  default = 1
 }
 
-variable "eks_node_group_desired_size" {
-  description = "Default EKS node group desired size"
-  type = number
+variable eks_nodegroup_max_unavail {
+  default = 1
+}
+
+variable eks_nodegroup_max_size {
   default = 2
 }
