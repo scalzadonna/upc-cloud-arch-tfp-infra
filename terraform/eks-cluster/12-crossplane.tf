@@ -25,10 +25,12 @@ resource "helm_release" "crossplane" {
 resource "null_resource" "kubectl_aws_secret_crossplane" {
   provisioner "local-exec" {
    # command = "kubectl create secret generic aws-secret -n crossplane-system --from-file=creds=/Users/santiagoscalzadonna/dev/ws/UPC/tfp/aws-credentials.txt"
-   command = "kubectl create secret generic aws-secret -n crossplane-system \
+   command = <<EOT
+      kubectl create secret generic aws-secret -n crossplane-system \
       --from-literal=aws_access_key_id=$AWS_KEY \
       --from-literal=aws_secret_access_key=$AWS_SECRET \
-      --from-literal=aws_session_token=$AWS_TOKEN"
+      --from-literal=aws_session_token=$AWS_TOKEN
+    EOT
   }
   depends_on = [helm_release.crossplane]
 }
