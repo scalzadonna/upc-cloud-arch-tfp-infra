@@ -39,13 +39,13 @@ jobs:
         run : |         
            cd terraform/eks-cluster
            terraform plan
-      - name: Terraform Apply      
-        if: env.TF_STEP_BY_STEP == 'apply'
+      - name: Terraform Apply
+        if: ${{ env.TF_STEP_BY_STEP == 'apply' }}
         run : |         
            cd terraform/eks-cluster
            terraform apply --auto-approve
       - name: Terraform Destroy
-        if: env.TF_STEP_BY_STEP == 'destroy'
+        if: ${{ env.TF_STEP_BY_STEP == 'destroy' }}
         run : |         
            cd terraform/eks-cluster
            terraform apply -destroy --auto-approve

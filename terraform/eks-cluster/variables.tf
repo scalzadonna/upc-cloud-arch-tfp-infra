@@ -44,7 +44,7 @@ variable role_name {
 }
 
 variable eks_nodegroup_name {
-  default = "ng-one" #ng-prv
+  default = "ng-priv"
 }
 
 variable eks_nodes_capacity_type {
