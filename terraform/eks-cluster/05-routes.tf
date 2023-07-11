@@ -69,4 +69,3 @@ resource "aws_route_table_association" "public-us-east-1b" {
   subnet_id      = aws_subnet.public-us-east-1b.id
   route_table_id = aws_route_table.public.id
 }
-
