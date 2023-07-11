@@ -67,5 +67,5 @@ variable eks_nodegroup_max_unavail {
 }
 
 variable eks_nodegroup_max_size {
-  default = 2
+  default = 1
 }
