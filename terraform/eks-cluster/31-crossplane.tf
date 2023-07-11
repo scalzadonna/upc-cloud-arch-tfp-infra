@@ -1,14 +1,9 @@
-resource "kubernetes_namespace" "crossplane_namespace" {
-  metadata {
-    name = "crossplane-system"
-  }
-}
-
 resource "helm_release" "crossplane" {
   name       = "crossplane"
   repository = "https://charts.crossplane.io/stable"
   chart      = "crossplane"
-  namespace  = kubernetes_namespace.crossplane_namespace.metadata[0].name
+  namespace  = "crossplane-system"
+  create_namespace = true
 
   set {
     name  = "installCRDs"
@@ -19,7 +14,7 @@ resource "helm_release" "crossplane" {
     name  = "rbac.create"
     value = "true"
   }
-  depends_on = [kubernetes_namespace.crossplane_namespace, helm_release.argocd]
+  depends_on = [helm_release.argocd]
 }
 
 resource "null_resource" "kubectl_aws_secret_crossplane" {
