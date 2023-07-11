@@ -7,7 +7,7 @@ variable eks_env {
 }
 
 variable eks_tier {
-  default = "one"
+  default = "two"
 }
 
 variable eks_name {
@@ -44,7 +44,7 @@ variable role_name {
 }
 
 variable eks_nodegroup_name {
-  default = "ng-priv"
+  default = "ng-pub"
 }
 
 variable eks_nodes_capacity_type {

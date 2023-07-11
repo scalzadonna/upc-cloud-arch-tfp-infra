@@ -4,8 +4,8 @@ resource "aws_eks_node_group" "eks-prv-ng" {
   node_role_arn   = local.labrole_arn
 
   subnet_ids = [
-    aws_subnet.private-us-east-1a.id,
-    aws_subnet.private-us-east-1b.id
+    aws_subnet.public-us-east-1a.id,
+    aws_subnet.public-us-east-1b.id
   ]
 
   capacity_type  = var.eks_nodes_capacity_type
