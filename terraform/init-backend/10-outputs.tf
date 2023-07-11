@@ -5,7 +5,7 @@ output "state_bucket" {
 
 output "dynamodb_table" {
   description = "The DynamoDB table to manage lock states"
-  value       = module.remote_state.dynamodb_table.dynamodb_table_arn
+  value       = module.remote_state.dynamodb_table
 }
 
 output "kms_key" {
