@@ -2,13 +2,14 @@ variable "region" {
   default = "us-east-1"
 }
 
+variable eks_tier {
+  default = "one"
+}
+
 variable eks_env {
   default = "dev"
 }
 
-variable eks_tier {
-  default = "three"
-}
 
 variable eks_name {
   default = "upc-tfp-eks"
