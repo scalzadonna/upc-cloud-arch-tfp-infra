@@ -26,5 +26,5 @@ jobs:
            cd terraform/init-backend
            terraform init
            terraform validate
-           #terraform plan
-           #terraform apply --auto-approve
+           terraform plan
+           terraform apply --auto-approve
