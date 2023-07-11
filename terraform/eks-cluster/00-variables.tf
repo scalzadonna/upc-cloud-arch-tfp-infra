@@ -7,7 +7,7 @@ variable eks_env {
 }
 
 variable eks_tier {
-  default = "two"
+  default = "three"
 }
 
 variable eks_name {
