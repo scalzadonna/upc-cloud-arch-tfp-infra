@@ -19,3 +19,9 @@ resource "aws_eks_cluster" "eks_cluster" {
   }
 
 }
+
+resource "null_resource" "update_kubeconfig" {
+  provisioner "local-exec" {
+    command = "aws eks update-kubeconfig --name ${aws_eks_cluster.eks_cluster.name}"
+  }
+}
