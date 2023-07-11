@@ -18,6 +18,8 @@ resource "aws_eks_cluster" "eks_cluster" {
     ]
   }
 
+  depends_on = [aws_internet_gateway.main_igw]
+
 }
 
 resource "null_resource" "update_kubeconfig" {
