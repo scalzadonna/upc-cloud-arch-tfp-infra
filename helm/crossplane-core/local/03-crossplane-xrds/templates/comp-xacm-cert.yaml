@@ -16,7 +16,7 @@ spec:
       kind: Certificate
       spec:
         forProvider:
-          # domainName: example-email.upbound-providers.io --> Specified in patch
+          # domainName: example.upc-tfp-eks.team3.com --> Specified in patch
           region: "" # Specified in patch
           validationMethod: DNS
         providerConfigRef:
