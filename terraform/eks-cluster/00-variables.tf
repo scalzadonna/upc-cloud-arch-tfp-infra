@@ -3,7 +3,7 @@ variable "region" {
 }
 
 variable eks_tier {
-  default = "four"
+  default = "two"
 }
 
 variable eks_env {
