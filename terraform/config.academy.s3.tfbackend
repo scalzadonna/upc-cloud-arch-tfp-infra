@@ -1,3 +1,3 @@
 bucket         = "tf-remote-state20230711145433399200000001"
-key            = "tf-upc-tfp-eks-dev-four"
+key            = "tf-upc-tfp-eks-dev-three"
 dynamodb_table = "tf-remote-state-lock"
